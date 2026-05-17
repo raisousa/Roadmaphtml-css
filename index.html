@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap HTML & CSS</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --success: #4ade80;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Barra de Progresso */
+        .progress-container {
+            background-color: var(--border);
+            border-radius: 999px;
+            height: 25px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 999px;
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Fases */
+        .phase {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .phase-number {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            font-weight: bold;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .phase-title {
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        /* Itens do Checklist */
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .check-item:hover {
+            transform: translateX(5px);
+        }
+
+        .check-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .custom-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-muted);
+            border-radius: 4px;
+            margin-right: 1rem;
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .check-item input:checked + .custom-check {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+
+        .custom-check::after {
+            content: '✔';
+            color: var(--bg-color);
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .check-item input:checked + .custom-check::after {
+            opacity: 1;
+        }
+
+        .item-text {
+            color: var(--text-main);
+            transition: all 0.3s;
+        }
+
+        .check-item input:checked ~ .item-text {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        code {
+            background-color: rgba(56, 189, 248, 0.2);
+            color: var(--accent);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .phase { padding: 1rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🗺️ Roadmap HTML & CSS</h1>
+        <p>Marque os itens conforme for aprendendo. Seu progresso é salvo automaticamente!</p>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-text" id="progressText">0% Concluído</div>
+        </div>
+    </header>
+
+    <!-- FASE 1 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">1</div>
+            <h2 class="phase-title">A Base do HTML</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-1"><span class="custom-check"></span><span class="item-text"><code>&lt;!DOCTYPE html&gt;</code> - Diz ao navegador que é HTML5.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-2"><span class="custom-check"></span><span class="item-text"><code>&lt;html&gt;</code> - Elemento raiz. Tudo fica dentro dele.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-3"><span class="custom-check"></span><span class="item-text"><code>&lt;head&gt;</code> - Metadados (não visível ao usuário).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-4"><span class="custom-check"></span><span class="item-text"><code>&lt;meta&gt;</code> e <code>&lt;title&gt;</code> - Configurações e título da aba.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-5"><span class="custom-check"></span><span class="item-text"><code>&lt;body&gt;</code> - Onde todo o conteúdo visível fica.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-6"><span class="custom-check"></span><span class="item-text"><code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code> - Títulos (Headings).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-7"><span class="custom-check"></span><span class="item-text"><code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code> - Parágrafo, negrito, itálico.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f1-8"><span class="custom-check"></span><span class="item-text"><code>&lt;br&gt;</code> e <code>&lt;hr&gt;</code> - Quebra de linha e linha horizontal.</span></label>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">2</div>
+            <h2 class="phase-title">Estrutura Semântica</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f2-1"><span class="custom-check"></span><span class="item-text"><code>&lt;header&gt;</code> - Cabeçalho da página ou seção.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f2-2"><span class="custom-check"></span><span class="item-text"><code>&lt;nav&gt;</code> - Bloco de navegação (menus).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f2-3"><span class="custom-check"></span><span class="item-text"><code>&lt;main&gt;</code> - Conteúdo principal (apenas 1 por página).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f2-4"><span class="custom-check"></span><span class="item-text"><code>&lt;section&gt;</code> e <code>&lt;article&gt;</code> - Seção genérica e conteúdo independente.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f2-5"><span class="custom-check"></span><span class="item-text"><code>&lt;aside&gt;</code> e <code>&lt;footer&gt;</code> - Barra lateral e rodapé.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f2-6"><span class="custom-check"></span><span class="item-text"><code>&lt;div&gt;</code> - Container genérico (usar apenas sem semântica).</span></label>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">3</div>
+            <h2 class="phase-title">Mídias e Links</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f3-1"><span class="custom-check"></span><span class="item-text"><code>&lt;a&gt;</code> - Links (<code>href</code> para destino, <code>target</code> para nova aba).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f3-2"><span class="custom-check"></span><span class="item-text"><code>&lt;img&gt;</code> - Imagens (<code>src</code> para caminho, <code>alt</code> para acessibilidade).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f3-3"><span class="custom-check"></span><span class="item-text"><code>&lt;video&gt;</code> e <code>&lt;audio&gt;</code> - Inserção de mídia.</span></label>
+    </div>
+
+    <!-- FASE 4 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">4</div>
+            <h2 class="phase-title">Listas e Tabelas</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f4-1"><span class="custom-check"></span><span class="item-text"><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code> - Listas não ordenadas, ordenadas e itens.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f4-2"><span class="custom-check"></span><span class="item-text"><code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code> - Estrutura da tabela.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f4-3"><span class="custom-check"></span><span class="item-text"><code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code> - Linhas, cabeçalho e dados da tabela.</span></label>
+    </div>
+
+    <!-- FASE 5 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">5</div>
+            <h2 class="phase-title">Formulários</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f5-1"><span class="custom-check"></span><span class="item-text"><code>&lt;form&gt;</code> e <code>&lt;input&gt;</code> - Container e campos de entrada.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f5-2"><span class="custom-check"></span><span class="item-text">Tipos de Input: <code>text</code>, <code>email</code>, <code>password</code>, <code>radio</code>, <code>checkbox</code>.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f5-3"><span class="custom-check"></span><span class="item-text"><code>&lt;label&gt;</code> - Rótulos (acessibilidade).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f5-4"><span class="custom-check"></span><span class="item-text"><code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;button&gt;</code> - Texto grande, dropdown e botões.</span></label>
+    </div>
+
+    <!-- FASE 6 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">6</div>
+            <h2 class="phase-title">O Básico do CSS</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f6-1"><span class="custom-check"></span><span class="item-text">Formas de aplicar CSS (Inline, Interno, Externo).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f6-2"><span class="custom-check"></span><span class="item-text">Seletores: Tag, Classe (.), ID (#).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f6-3"><span class="custom-check"></span><span class="item-text">Box Model: <code>content</code>, <code>padding</code>, <code>border</code>, <code>margin</code>.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f6-4"><span class="custom-check"></span><span class="item-text"><code>box-sizing: border-box</code> - O conceito mais importante do Box Model.</span></label>
+    </div>
+
+    <!-- FASE 7 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">7</div>
+            <h2 class="phase-title">Estilização Visual</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f7-1"><span class="custom-check"></span><span class="item-text"><code>color</code> e <code>background-color</code> - Cores.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f7-2"><span class="custom-check"></span><span class="item-text"><code>font-family</code>, <code>font-size</code>, <code>font-weight</code> - Tipografia.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f7-3"><span class="custom-check"></span><span class="item-text"><code>line-height</code> e <code>text-align</code> - Espaçamento e alinhamento.</span></label>
+    </div>
+
+    <!-- FASE 8 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">8</div>
+            <h2 class="phase-title">Layout e Posicionamento</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f8-1"><span class="custom-check"></span><span class="item-text"><code>display</code>: block, inline, inline-block, none.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f8-2"><span class="custom-check"></span><span class="item-text"><code>position</code>: static, relative, absolute, fixed, sticky.</span></label>
+    </div>
+
+    <!-- FASE 9 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">9</div>
+            <h2 class="phase-title">Flexbox (1D)</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f9-1"><span class="custom-check"></span><span class="item-text"><code>display: flex</code> e <code>flex-direction</code>.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f9-2"><span class="custom-check"></span><span class="item-text"><code>justify-content</code> e <code>align-items</code> - Alinhamento.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f9-3"><span class="custom-check"></span><span class="item-text"><code>gap</code> e <code>flex-wrap</code> - Espaço e quebra de linha.</span></label>
+    </div>
+
+    <!-- FASE 10 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">10</div>
+            <h2 class="phase-title">CSS Grid (2D)</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f10-1"><span class="custom-check"></span><span class="item-text"><code>display: grid</code>, <code>grid-template-columns</code>, <code>grid-template-rows</code>.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f10-2"><span class="custom-check"></span><span class="item-text"><code>grid-area</code> - Mesclando células.</span></label>
+    </div>
+
+    <!-- FASE 11 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">11</div>
+            <h2 class="phase-title">Responsividade</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f11-1"><span class="custom-check"></span><span class="item-text">Unidades: <code>rem</code>, <code>em</code>, <code>%</code>, <code>vw</code>, <code>vh</code>.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f11-2"><span class="custom-check"></span><span class="item-text"><code>@media</code> queries - Adaptando telas.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f11-3"><span class="custom-check"></span><span class="item-text">Imagens responsivas: <code>max-width: 100%</code> e <code>height: auto</code>.</span></label>
+    </div>
+
+    <!-- FASE 12 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">12</div>
+            <h2 class="phase-title">Efeitos Visuais e Transições</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f12-1"><span class="custom-check"></span><span class="item-text"><code>border-radius</code>, <code>box-shadow</code>, <code>opacity</code>.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f12-2"><span class="custom-check"></span><span class="item-text"><code>transition</code> e <code>transform</code> - Animações básicas.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f12-3"><span class="custom-check"></span><span class="item-text">Pseudo-classes: <code>:hover</code>, <code>:focus</code>.</span></label>
+    </div>
+
+    <!-- FASE 13 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">13</div>
+            <h2 class="phase-title">Tópicos Avançados</h2>
+        </div>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f13-1"><span class="custom-check"></span><span class="item-text">Variáveis CSS (<code>--cor-principal</code>).</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f13-2"><span class="custom-check"></span><span class="item-text">Pseudo-elementos: <code>::before</code> e <code>::after</code>.</span></label>
+        <label class="check-item"><input type="checkbox" class="check-input" id="f13-3"><span class="custom-check"></span><span class="item-text">Metodologias (BEM).</span></label>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('.check-input');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+
+        // Função para atualizar a barra de progresso
+        function updateProgress() {
+            const total = checkboxes.length;
+            let checked = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) checked++;
+            });
+            const percentage = Math.round((checked / total) * 100);
+            progressBar.style.width = percentage + '%';
+            progressText.innerText = percentage + '% Concluído';
+        }
+
+        // Carregar estados salvos e adicionar eventos
+        checkboxes.forEach(cb => {
+            const id = cb.id;
+            
+            // Verifica se já tem algo salvo no localStorage
+            if (localStorage.getItem(id) === 'true') {
+                cb.checked = true;
+            }
+
+            // Adiciona evento de mudança
+            cb.addEventListener('change', function() {
+                // Salva no localStorage
+                localStorage.setItem(id, this.checked);
+                // Atualiza a barra
+                updateProgress();
+            });
+        });
+
+        // Inicializa a barra de progresso na primeira carga
+        updateProgress();
+    });
+</script>
+
+</body>
+</html>
